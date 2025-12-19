@@ -4,8 +4,8 @@
     "dev": "bun run --env-file=.env --hot src/index.ts"
   },
   "dependencies": {
-    "@hono/zod-openapi": "^1.1.5",
-    "@scalar/hono-api-reference": "^0.9.28",
+    "@hono/zod-openapi": "^1.1.6",
+    "@scalar/hono-api-reference": "^0.9.30",
     "hono": "^4.11.1",
     "zod": "^4.2.1"
   },

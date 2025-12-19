@@ -1,17 +1,30 @@
+/* eslint-disable no-console */
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { serve } from "bun";
+import { logger } from "hono/logger";
 
-import env from "./lib/utils/env";
+import env from "./shared/config/env.config";
 
 const app = new OpenAPIHono();
 
 const port = env.PORT;
 
-app.get("/", ctx => ctx.json(
-  {
-    ok: true,
-  },
-));
+app.use(logger());
+
+app.get("/", (ctx) => {
+
+  return ctx.json(
+    {
+      ok: true,
+    },
+  );
+});
+
+// setupDB();
+// setupOpenAPI();
+// setupCommonMiddlewares(); // logger, cors, etc
+// setupRateLimiter(); // route based
+// setupAuthMiddleware(); // route based
 
 const server = serve({
   fetch: app.fetch,
@@ -21,11 +34,13 @@ const server = serve({
   idleTimeout: 5,
 });
 
-// eslint-disable-next-line no-console
-console.log(`
-  🚀 Hono x Bun Server is live!
-  ----------------------------
-  Port: ${server.port}
-  Mode: ${env.NODE_ENV || "development"}
-  PID:  ${process.pid}
-`);
+const live = [
+  { ACTION: "hostname", Detail: server.hostname, active: true },
+  { ACTION: "env", Detail: env.NODE_ENV, active: true },
+  { ACTION: "PID", Detail: process.pid, active: true },
+  { ACTION: "Pending Requests", Detail: server.pendingRequests },
+  { ACTION: "Pending Websockets", Detail: server.pendingWebSockets },
+];
+
+console.log("🚀 Hono x Bun Server is live!");
+console.table(live);
