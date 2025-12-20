@@ -1,17 +1,20 @@
 {
   "name": "backend-hono-psql-kysely-bun",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "bun run --env-file=.env --hot src/index.ts"
+    "dev": "bun run --env-file=.env --hot src/app"
   },
   "dependencies": {
     "@hono/zod-openapi": "^1.1.6",
     "@scalar/hono-api-reference": "^0.9.30",
+    "drizzle-orm": "^0.45.1",
     "hono": "^4.11.1",
     "zod": "^4.2.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.1",
-    "@types/bun": "latest",
+    "@types/bun": "^1.3.5",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0"
   }

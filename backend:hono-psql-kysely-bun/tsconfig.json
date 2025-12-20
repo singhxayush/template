@@ -2,6 +2,14 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
+    "rootDir": "./src",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/context": ["./src/context/*"]
+    },
     "strict": true,
-  }
+    "outDir": "./dist"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
 }
