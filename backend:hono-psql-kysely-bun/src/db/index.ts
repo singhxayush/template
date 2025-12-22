@@ -3,7 +3,7 @@ import type { PoolConfig } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 import pg from "pg";
 
-import type { DB } from "./db.d";
+import type { DB } from "@/db/types";
 
 const { Pool } = pg;
 

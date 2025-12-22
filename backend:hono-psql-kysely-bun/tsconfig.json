@@ -5,11 +5,13 @@
     "rootDir": "./src",
     "paths": {
       "@/*": ["./src/*"],
-      "@/context": ["./src/context/*"]
+      "@/context/*": ["./src/context/*"],
+      "@/db/*": ["./src/db/*"],
+      "@/utils/*": ["./src/shared/utils/*"]
     },
     "strict": true,
     "outDir": "./dist"
   },
-  "include": ["src"],
+  "include": ["src", "kysely.config.ts"],
   "exclude": ["node_modules"]
 }

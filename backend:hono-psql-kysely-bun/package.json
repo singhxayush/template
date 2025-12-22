@@ -4,9 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "bun run --env-file=.env --hot src/app",
-    "db:kysely-codegen": "./node_modules/.bin/kysely-codegen",
-    "migrate": "node-pg-migrate",
-    "tsc": "bun -b tsc"
+    "//_helper": "Base command with explicit paths for binary and config",
+    "migrate:cli": "bun -b ./node_modules/.bin/kysely-migrate --config ./src/db/kysely-migrate.config.ts",
+    "//_commands": "The actual commands you run",
+    "db:migrate:create": "bun run migrate:cli create --name",
+    "db:migrate:up": "bun run migrate:cli up",
+    "db:migrate:down": "bun run migrate:cli down",
+    "db:migrate:list": "bun run migrate:cli list",
+    "db:migrate:codegen": "bun run migrate:cli codegen",
+    "//_shortcuts": "Standard alias for running pending migrations",
+    "db:migrate": "bun run db:migrate:up"
   },
   "peerDependencies": {
     "typescript": "^5"
@@ -26,8 +33,6 @@
     "@types/pg": "^8.16.0",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0",
-    "kysely-codegen": "^0.19.0",
-    "kysely-migrate": "^0.0.16",
-    "node-pg-migrate": "^8.0.4"
+    "kysely-migrate": "^0.0.16"
   }
 }
