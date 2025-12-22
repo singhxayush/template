@@ -1,9 +1,10 @@
 import { Scalar } from "@scalar/hono-api-reference";
 
+import env from "@/utils/env";
+
 import type { AppOpenAPI } from "./types";
 
 import packageJSON from "../../package.json";
-import env from "@/shared/utils/env";
 
 export function configureOpenAPI(app: AppOpenAPI) {
   // OpenAPI JSON Endpoint (The "Contract")

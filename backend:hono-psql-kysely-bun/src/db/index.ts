@@ -1,26 +1,25 @@
-import type { PoolConfig } from "pg";
-
 import { Kysely, PostgresDialect } from "kysely";
 import pg from "pg";
 
 import type { DB } from "@/db/types";
 
+import env from "@/shared/utils/env";
+
 const { Pool } = pg;
 
-export function createDBPool(config: PoolConfig) {
-  const databaseURL = `postgres://${config.user}:${config.password as string}@${
-    config.host
-  }:${config.port}/${config.database}`;
+const poolConfig = {
+  host: env.DB_HOST,
+  port: Number(env.DB_PORT),
+  database: env.DB_NAME,
+  user: env.DB_USER,
+  password: env.DB_PASSWORD,
+  max: 10,
+};
 
-  const dialect = new PostgresDialect({
-    pool: new Pool({
-      connectionString: databaseURL,
-    }),
-  });
+const dialect = new PostgresDialect({
+  pool: new Pool(poolConfig),
+});
 
-  const db = new Kysely<DB>({
-    dialect,
-  });
-
-  return db;
-}
+export const db = new Kysely<DB>({
+  dialect,
+});

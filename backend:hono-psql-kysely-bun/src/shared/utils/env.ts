@@ -14,8 +14,16 @@ const EnvSchema = z
       "trace",
       "silent",
     ]),
-    DATABASE_URL: z.string().url(),
+    // Database Individual Fields
+    DB_HOST: z.string().min(1),
+    DB_PORT: z.coerce.number().default(5432),
+    DB_NAME: z.string().min(1),
+    DB_USER: z.string().min(1),
+    DB_PASSWORD: z.string().min(1),
+    DB_MAX_CONNECTIONS: z.coerce.number().default(10),
+
     DATABASE_AUTH_TOKEN: z.string().optional(),
+    DATABASE_URL: z.string().url(),
   })
   .superRefine((input, ctx) => {
     if (input.NODE_ENV === "production" && !input.DATABASE_AUTH_TOKEN) {

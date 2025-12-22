@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 import { serve } from "bun";
-import { createApp } from "./app";
+
 import { createBunConfig } from "@/shared/configs/server.config";
-import env from "@/shared/utils/env";
 import { setupGracefulShutdown } from "@/shared/utils/shutdown";
+import env from "@/utils/env";
+
+import { createApp } from "./app";
 
 // 1. Initialize the App
 const app = createApp();
