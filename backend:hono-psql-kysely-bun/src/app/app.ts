@@ -20,7 +20,7 @@ export function createApp() {
   const routeGroups = [
     {
       router: TodoRouteGroup,
-      path: "/todo",
+      path: "/todos",
     },
   ];
 

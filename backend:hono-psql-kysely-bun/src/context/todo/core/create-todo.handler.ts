@@ -12,12 +12,11 @@ export const createTodoHandler: AppRouteHandler<CreateTodoRouteType> = async (
   try {
     const raw = ctx.req.valid("json");
 
-    console.log(raw);
-
     return ctx.json(
       {
         message: "Todo Created",
         success: true,
+        data: raw,
       },
       CREATED,
     );

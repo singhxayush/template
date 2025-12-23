@@ -11,14 +11,16 @@ import createRouter from "@/lib/open-api/create-router";
 import {
   CREATED,
   INTERNAL_SERVER_ERROR,
+  OK,
 } from "@/shared/constants/status-codes";
 
 import { createTodoHandler } from "../core/create-todo.handler";
+import { getTodosHandler } from "../core/get-todos.handler";
 
 export const todoRoutes = createRouter();
 
 const createTodoRoute = createRoute({
-  tags: ["todo"],
+  tags: ["Todos"],
   method: "post",
   path: "/",
   summary: "Create Todo",
@@ -37,3 +39,21 @@ const createTodoRoute = createRoute({
 
 todoRoutes.openapi(createTodoRoute, createTodoHandler);
 export type CreateTodoRouteType = typeof createTodoRoute;
+
+const getTodosRoute = createRoute({
+  tags: ["Todos"],
+  method: "get",
+  path: "/",
+  summary: "Get Todos",
+  description: "Get todo list of a user",
+  responses: {
+    [OK]: jsonContent(createTodoPayloadSuccess, "Todo List"),
+    [INTERNAL_SERVER_ERROR]: jsonContent(
+      createTodoPayloadError,
+      "Todo Creation Failed",
+    ),
+  },
+});
+
+todoRoutes.openapi(getTodosRoute, getTodosHandler);
+export type GetTodosRouteType = typeof getTodosRoute;

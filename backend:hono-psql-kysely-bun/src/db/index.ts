@@ -1,3 +1,5 @@
+import type { Transaction } from "kysely";
+
 import { Kysely, PostgresDialect } from "kysely";
 import pg from "pg";
 
@@ -23,3 +25,5 @@ const dialect = new PostgresDialect({
 export const db = new Kysely<DB>({
   dialect,
 });
+
+export type DbContext = Kysely<DB> | Transaction<DB>;

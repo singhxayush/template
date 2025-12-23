@@ -12,6 +12,7 @@
     "db:migrate:down": "bun run migrate:cli down",
     "db:migrate:list": "bun run migrate:cli list",
     "db:migrate:codegen": "bun run migrate:cli codegen",
+    "db:studio": "bun -b ./node_modules/.bin/drizzle-kit studio --config ./src/db/drizzle.config.ts",
     "//_shortcuts": "Standard alias for running pending migrations",
     "db:migrate": "bun run db:migrate:up"
   },
@@ -21,6 +22,7 @@
   "dependencies": {
     "@hono/zod-openapi": "^1.1.6",
     "@scalar/hono-api-reference": "^0.9.30",
+    "drizzle-orm": "^0.45.1",
     "hono": "^4.11.1",
     "kysely": "^0.28.9",
     "pg": "^8.16.3",
@@ -31,6 +33,7 @@
     "@antfu/eslint-config": "^6.7.1",
     "@types/bun": "^1.3.5",
     "@types/pg": "^8.16.0",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.2",
     "eslint-plugin-format": "^1.1.0",
     "kysely-migrate": "^0.0.16"
