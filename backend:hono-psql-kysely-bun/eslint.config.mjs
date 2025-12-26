@@ -9,7 +9,10 @@ export default antfu({
     semi: true,
     quotes: "double",
   },
-  ignores: ["**/migrations/*"],
+  ignores: [
+    "**/migrations/*", 
+    "src/db/types.ts"
+  ],
 }, {
   rules: {
     "no-console": ["warn"],

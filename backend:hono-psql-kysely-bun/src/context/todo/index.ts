@@ -1,4 +1,4 @@
-import createRouter from "@/shared/lib/open-api/create-router";
+import createRouter from "@/lib/open-api/create-router";
 
 import { todoRoutes } from "./api/todo.routes";
 

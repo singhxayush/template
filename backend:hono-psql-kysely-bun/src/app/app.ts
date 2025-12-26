@@ -2,7 +2,7 @@ import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { TodoRouteGroup } from "@/context/todo";
-import createRouter from "@/shared/lib/open-api/create-router";
+import createRouter from "@/lib/open-api/create-router";
 
 import { configureOpenAPI } from "./openapi";
 
@@ -20,7 +20,7 @@ export function createApp() {
   const routeGroups = [
     {
       router: TodoRouteGroup,
-      path: "/todo",
+      path: "/todos",
     },
   ];
 
