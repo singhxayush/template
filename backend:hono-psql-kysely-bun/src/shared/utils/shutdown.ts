@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { Server } from "bun";
 
 // Fix for "Namespace 'bun' has no exported member 'Signal'"

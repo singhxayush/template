@@ -1,7 +1,10 @@
+import type { Context, Next } from "hono";
+
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
 import { TodoRouteGroup } from "@/context/todo";
+import { createDBPool } from "@/db";
 import createRouter from "@/lib/open-api/create-router";
 
 import { configureOpenAPI } from "./openapi";
@@ -12,6 +15,13 @@ export function createApp() {
   // --- Global Middlewares ---
   app.use(logger());
   app.use(cors());
+
+  const dbPool = createDBPool();
+  app.use(async (ctx: Context, next: Next) => {
+    // Attach the database connection to the context
+    ctx.set("datastore", dbPool);
+    await next();
+  });
 
   // --- Setup OpenAPI & Scalar ---
   configureOpenAPI(app);
@@ -24,7 +34,7 @@ export function createApp() {
     },
   ];
 
-  routeGroups.map((rg) => app.route(rg.path, rg.router));
+  routeGroups.map(rg => app.route(rg.path, rg.router));
 
   app.get("/", (c) => {
     return c.json({

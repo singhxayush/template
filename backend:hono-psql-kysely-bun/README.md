@@ -132,19 +132,20 @@ src/integrations
 ### Key Architectural Decisions in this Structure:
 
 1. **`src/contexts/*/data/*.schema.ts`**:
-* You define Drizzle schemas **inside the context**.
-* In your root `drizzle.config.ts`, you will point to `src/contexts/**/*.schema.ts`. This allows Drizzle to see the "Whole DB," but allows you to keep the file physically inside the module.
 
+- You define Drizzle schemas **inside the context**.
+- In your root `drizzle.config.ts`, you will point to `src/contexts/**/*.schema.ts`. This allows Drizzle to see the "Whole DB," but allows you to keep the file physically inside the module.
 
 2. **`src/contexts/*/index.ts`**:
-* This is your **"Module Barrier."**
-* Only export the main Router and shared Types. *Never* export the internal Service or Repo. This forces other parts of the app to use the API (or an Event) to interact with this module.
 
+- This is your **"Module Barrier."**
+- Only export the main Router and shared Types. _Never_ export the internal Service or Repo. This forces other parts of the app to use the API (or an Event) to interact with this module.
 
 3. **`src/app/index.ts` vs `src/app/app.ts**`:
-* `app.ts` creates the `Hono` instance and mounts routes (`app.route('/auth', authRouter)`).
-* `index.ts` imports the app and feeds it to `Bun.serve`. This separation is critical for writing **Integration Tests** (you can spin up the `app` in a test without binding a real network port).
 
+- `app.ts` creates the `Hono` instance and mounts routes (`app.route('/auth', authRouter)`).
+- `index.ts` imports the app and feeds it to `Bun.serve`. This separation is critical for writing **Integration Tests** (you can spin up the `app` in a test without binding a real network port).
 
 4. **`migrations/` location**:
-* Placed in `shared/db`. Even though schemas are distributed in contexts, migrations are usually linear and sequential for the whole monolith, so they live centrally.
+
+- Placed in `shared/db`. Even though schemas are distributed in contexts, migrations are usually linear and sequential for the whole monolith, so they live centrally.

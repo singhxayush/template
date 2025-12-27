@@ -28,7 +28,7 @@ export const defaultHook: Hook<any, AppBindings, any, any> = (result, c) => {
 
   // 2. Format the Zod Error into a clean structure
   // 'result.error' is a generic ZodError object
-  const formattedIssues = result.error.issues.map((issue) => ({
+  const formattedIssues = result.error.issues.map(issue => ({
     path: issue.path.join("."), // e.g., "user.email"
     message: issue.message, // e.g., "Invalid email address"
     code: issue.code, // e.g., "invalid_string"

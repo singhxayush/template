@@ -1,12 +1,11 @@
 import type { AppRouteHandler } from "@/app/types";
 
-import { db } from "@/db";
 import { INTERNAL_SERVER_ERROR, OK } from "@/shared/constants/status-codes";
 
 import { TodosRepository } from "../data/todo.repo";
 
 export const getTodosHandler: AppRouteHandler<any> = async (ctx) => {
-  const todoRepo = new TodosRepository(db);
+  const todoRepo = new TodosRepository(ctx);
 
   try {
     // if (!userId) {
@@ -14,7 +13,7 @@ export const getTodosHandler: AppRouteHandler<any> = async (ctx) => {
     // }
 
     // 2. Fetch data via repo
-    const todos = await todoRepo.findAllByUserId("1");
+    const todos = await todoRepo.getEntry();
 
     // 3. Return response
     return ctx.json(
@@ -24,7 +23,8 @@ export const getTodosHandler: AppRouteHandler<any> = async (ctx) => {
       },
       OK,
     );
-  } catch (error) {
+  }
+  catch (error) {
     console.error("Fetch Todos Error:", error);
     return ctx.json(
       {
