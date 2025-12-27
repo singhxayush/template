@@ -4,6 +4,8 @@ import {
   createTodoPayload,
   createTodoPayloadError,
   createTodoPayloadSuccess,
+  getTodoPayloadError,
+  getTodoPayloadSuccess,
 } from "@/context/todo/data/todo.schema";
 import jsonContent from "@/lib/json-content";
 import jsonContentRequired from "@/lib/json-content-required";
@@ -47,9 +49,9 @@ const getTodosRoute = createRoute({
   summary: "Get Todos",
   description: "Get todo list of a user",
   responses: {
-    [OK]: jsonContent(createTodoPayloadSuccess, "Todo List"),
+    [OK]: jsonContent(getTodoPayloadSuccess, "Todo List"),
     [INTERNAL_SERVER_ERROR]: jsonContent(
-      createTodoPayloadError,
+      getTodoPayloadError,
       "Todo Creation Failed",
     ),
   },

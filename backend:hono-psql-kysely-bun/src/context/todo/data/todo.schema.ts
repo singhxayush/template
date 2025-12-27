@@ -25,3 +25,14 @@ export const createTodoPayloadError = z.object({
 });
 
 export type SreateTodoPayloadSuccess = z.infer<typeof createTodoPayloadSuccess>;
+
+export const getTodoPayloadSuccess = z.object({
+  message: z.string().default("success"),
+  success: z.boolean().default(true),
+  data: z.array(z.object()),
+});
+
+export const getTodoPayloadError = z.object({
+  message: z.string().default("Not found"),
+  success: z.boolean().default(false),
+});

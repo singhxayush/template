@@ -10,8 +10,8 @@ export default antfu({
     quotes: "double",
   },
   ignores: [
-    "**/migrations/*", 
-    "src/db/types.ts"
+    "**/migrations/*",
+    "src/db/types.ts",
   ],
 }, {
   rules: {

@@ -20,7 +20,8 @@ export const createTodoHandler: AppRouteHandler<CreateTodoRouteType> = async (
       },
       CREATED,
     );
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
     return ctx.json(
       {

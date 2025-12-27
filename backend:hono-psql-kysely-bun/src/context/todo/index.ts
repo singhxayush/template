@@ -11,4 +11,4 @@ const routes = [
   },
 ];
 
-routes.map((r) => TodoRouteGroup.route(r.path, r.router));
+routes.map(r => TodoRouteGroup.route(r.path, r.router));

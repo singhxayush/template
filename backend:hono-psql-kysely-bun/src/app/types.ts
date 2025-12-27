@@ -1,4 +1,7 @@
 import type { OpenAPIHono, RouteConfig, RouteHandler } from "@hono/zod-openapi";
+import type { Kysely } from "kysely";
+
+import type { DB } from "@/db/db";
 
 export interface User {
   id: string;
@@ -19,6 +22,7 @@ export interface AppBindings {
   // 2. DATA THAT LIVES FOR THE DURATION OF A SINGLE REQUEST
   Variables: {
     user: User | null; // Authenticated user
+    datastore: Kysely<DB>;
     traceId: string; // Unique ID for this specific request
     requestId: string; // Often used for headers
     isBot: boolean; // Added by a User-Agent middleware
